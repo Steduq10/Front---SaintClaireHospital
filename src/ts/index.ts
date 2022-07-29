@@ -149,7 +149,7 @@ function createReminder(specialistPatient:SpecialistPatient){
         
         name.value = ''
         physician.value = ''
-        const submitButton = document.querySelector('.patients-form-button') as HTMLButtonElement
+        const submitButton = document.querySelector('.specialist-form-button') as HTMLButtonElement
         submitButton.classList.remove('display_none')
       
         const editButton = document.querySelector('.form-edit-button') as HTMLButtonElement

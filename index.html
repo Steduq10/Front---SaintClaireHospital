@@ -13,22 +13,31 @@
     </div>
     <link rel="stylesheet" href="style.css"/>
 <body>
-    <div class="parent">
-        <button class="box" id="specialist"  onclick="newGame()">Specialist</button>
-          
-            <button class="box" id="patient"  onclick="drawCard()">Patient</button>
-            <br/>
-
-    </div>
+    
 
     <div class="main-container">
         <div class="form-notes-container">
           <section class="form-container">
+            
+              <div class="parent">
+                <button class="box" id="specialist"  onclick="newGame()">Specialist</button>
+                <form class="specialtiesPatients-form" action="#">
+                  <input placeholder="name" class="name-input" type="text" />
+                  <input placeholder="physician" class="physician-input" type="text">
+                  <button class="specialist-form-button">Submit</button>
+                </form>
+            <button class="box" id="patient"  onclick="drawCard()">Patient</button>
             <form class="specialtiesPatients-form" action="#">
               <input placeholder="name" class="name-input" type="text" />
-              <input placeholder="physician" class="physician-input" type="text">
+              <input placeholder="age" class="age-input" type="text">
+              <input placeholder="identification number" class="identificationNumber-input" type="text">
+              <input placeholder="number of appointments" class="numberOfAppointments-input" type="text">
+              <input placeholder="date appointment" class="dateAppointment-input" type="text">
               <button class="patients-form-button">Submit</button>
-            </form>
+            </form>      
+            </div>
+          
+              
           </section>
           <div class="specialist-container">
     
