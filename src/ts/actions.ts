@@ -22,7 +22,7 @@ export async function postSpecialistPatient(specialistPatient:SpecialistPatient)
 }
 
 export async function deleteSpecialist(id:string){
-  const response:Response = await fetch(`http://localhost:8081/hospital/delete/specialty`, 
+  const response:Response = await fetch(`http://localhost:8081/hospital/delete/specialty${id}`, 
   {
     method: 'DELETE'
   })

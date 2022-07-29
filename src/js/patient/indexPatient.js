@@ -25,6 +25,7 @@ function handleSubmit(e) {
             identificationNumber: identificationNumberInput.value,
             numberOfAppointments: numberOfAppointmentsInput.value,
             dateAppointment: dateAppointmentInput.value,
+            fkSpecialtyId: fkSpecialtyIdInput.value
         };
         postPatient(newPatient).then(response => {
             if (response.status === 200) {
@@ -35,6 +36,7 @@ function handleSubmit(e) {
                 identificationNumberInput.value = '';
                 numberOfAppointmentsInput.value = '';
                 dateAppointmentInput.value = '';
+                fkSpecialtyIdInput.value = '';
             }
         });
     }
@@ -63,6 +65,10 @@ function createPatient(patient) {
     const dateAppointmentP = document.createElement('p')
     dateAppointmentP.className = `single-patient-physician-${patient.id}`
     dateAppointmentP.innerText = patient.dateAppointment
+
+    const fkSpecialtyIdP = document.createElement('p')
+    fkSpecialtyIdP.className = `single-fkSpecialtyId-physician-${patient.id}`
+    fkSpecialtyIdP.innerText = patient.fkSpecialtyId
   
     const deleteButton = document.createElement('button')
     deleteButton.className = 'single-patient-delete-button'
@@ -74,7 +80,7 @@ function createPatient(patient) {
     editButton.innerText = 'edit'
     editButton.addEventListener('click', ()=> hanldeEdit(patient))
   
-    div.append(nameP, ageP, identificationNumberP, numberOfAppointmentsP, dateAppointmentP, deleteButton, editButton) 
+    div.append(nameP, ageP, identificationNumberP, numberOfAppointmentsP, dateAppointmentP,fkSpecialtyIdP, deleteButton, editButton) 
     patientContainer.append(div)
 }
 function hanldeEdit(patient) {
@@ -83,6 +89,7 @@ function hanldeEdit(patient) {
     const identificationNumberInput = document.querySelector('.identificationNumber-input');
     const numberOfAppointmentsInput = document.querySelector('.numberOfAppointments-input');
     const dateAppointmentInput = document.querySelector('.dateAppointment-input');
+    const fkSpecialtyIdInput = document.querySelector('.fkSpecialtyId-input')
     
     const submitButton = document.querySelector('.specialist-form-button')
     submitButton.classList.add('display_none')
@@ -100,6 +107,7 @@ function hanldeEdit(patient) {
     identificationNumberInput.value = patient.identificationNumber;
     numberOfAppointmentsInput.value = patient.numberOfAppointments;
     dateAppointmentInput.value = patient.dateAppointment;
+    fkSpecialtyIdInput.value = patient.fkSpecialtyId;
 }
 function executeEdition(specialistPatient, name, physician) {
    
@@ -109,8 +117,8 @@ function executeEdition(specialistPatient, name, physician) {
         age: age.value,
         identificationNumber: identificationNumber.value,
         numberOfAppointments: numberOfAppointments.value,
-        dateAppointment: dateAppointment.value
-        
+        dateAppointment: dateAppointment.value,
+        fkSpecialtyId: fkSpecialtyId.value
     };
     putPatient(patientEdited).then(response => {
         if (response.status === 200) {
@@ -127,14 +135,15 @@ function executeEdition(specialistPatient, name, physician) {
             pNumberOfAppointments.innerText = patientsEdited.numberOfAppointments
             const pDateAppointment = document.querySelector(`.single-patient-date-${patient.id}`)
             pDateAppointment.innerText = patientsEdited.dateAppointment
-           
+            const pFkSpecialtyId = document.querySelector(`.single-patient-fkSpecialtyId-${patient.id}`)
+            pFkSpecialtyId.innerText = patientsEdited.fkSpecialtyId
             
             name.value = ''
             age.value = ''
             identificationNumber.value = '',
             numberOfAppointments.value = '',
-            dateAppointment.value = ''
-    
+            dateAppointment.value = '',
+            fkSpecialtyId.value = ''
     
             const submitButton = document.querySelector('.patients-form-button')
             submitButton.classList.remove('display_none')

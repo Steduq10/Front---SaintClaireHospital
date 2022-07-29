@@ -22,7 +22,7 @@ export async function postPatient(patient:Patient){
 }
 
 export async function deletePatient(id:string){
-  const response:Response = await fetch(`http://localhost:8081/hospital/delete/patient`, 
+  const response:Response = await fetch(`http://localhost:8081/hospital/delete/patient${id}`, 
   {
     method: 'DELETE'
   })

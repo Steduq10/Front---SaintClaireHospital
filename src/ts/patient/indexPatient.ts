@@ -11,11 +11,12 @@ export interface Patient{
     identificationNumber:string
     numberOfAppointments:string
     dateAppointment:string
+    fkSpecialtyId: string
 }
 
 getAllPatient().then(patient => {
   state = patient
-  recreateNotes(patient);
+  recreatePatient(patient);
 })
 
 let state:Patient[] = []
@@ -30,8 +31,9 @@ function handleSubmit(e:SubmitEvent){
   const identificationNumberInput = document.querySelector('.identificationNumber-input') as HTMLInputElement;
   const numberOfAppointmentsInput = document.querySelector('.numberOfAppointments-input') as HTMLInputElement;
   const dateAppointmentInput = document.querySelector('.dayAppointment-input') as HTMLInputElement;
+  const fkSpecialtyIdInput = document.querySelector('.fkSpecialtyId-input') as HTMLInputElement;
   
-  if(nameInput.value&&identificationNumberInput.value&&ageInput.value&&numberOfAppointmentsInput.value&&dateAppointmentInput.value){
+  if(nameInput.value&&identificationNumberInput.value&&ageInput.value&&numberOfAppointmentsInput.value&&dateAppointmentInput.value&&fkSpecialtyIdInput.value){
     
     const newPatient: Patient = {
       id: null,
@@ -40,6 +42,7 @@ function handleSubmit(e:SubmitEvent){
       identificationNumber: identificationNumberInput.value,
       numberOfAppointments: numberOfAppointmentsInput.value,
       dateAppointment: dateAppointmentInput.value,
+      fkSpecialtyId: fkSpecialtyIdInput.value
       
       
     }
@@ -56,6 +59,7 @@ function handleSubmit(e:SubmitEvent){
           identificationNumberInput.value = '';
           numberOfAppointmentsInput.value = '';
           dateAppointmentInput.value = '';
+          fkSpecialtyIdInput.value = '';
         }
       }
     )
@@ -89,6 +93,10 @@ function createPatient(patient:Patient){
     const dateAppointmentP:HTMLParagraphElement = document.createElement('p')
     dateAppointmentP.className = `single-patient-physician-${patient.id}`
     dateAppointmentP.innerText = patient.dateAppointment
+
+    const fkSpecialtyIdP:HTMLParagraphElement = document.createElement('p')
+    fkSpecialtyIdP.className = `single-fkSpecialtyId-physician-${patient.id}`
+    fkSpecialtyIdP.innerText = patient.fkSpecialtyId
   
     const deleteButton:HTMLButtonElement = document.createElement('button')
     deleteButton.className = 'single-patient-delete-button'
@@ -100,7 +108,7 @@ function createPatient(patient:Patient){
     editButton.innerText = 'edit'
     editButton.addEventListener('click', ()=> hanldeEdit(patient))
   
-    div.append(nameP, ageP, identificationNumberP, numberOfAppointmentsP, dateAppointmentP, deleteButton, editButton) 
+    div.append(nameP, ageP, identificationNumberP, numberOfAppointmentsP, dateAppointmentP,fkSpecialtyIdP, deleteButton, editButton) 
     patientContainer.append(div)
   }
   
@@ -110,6 +118,7 @@ function createPatient(patient:Patient){
     const identificationNumberInput = document.querySelector('.identificationNumber-input') as HTMLInputElement;
     const numberOfAppointmentsInput = document.querySelector('.numberOfAppointments-input') as HTMLInputElement;
     const dateAppointmentInput = document.querySelector('.dateAppointment-input') as HTMLInputElement;
+    const fkSpecialtyIdInput = document.querySelector('.fkSpecialtyId-input') as HTMLInputElement;
     
     const submitButton = document.querySelector('.specialist-form-button') as HTMLButtonElement
     submitButton.classList.add('display_none')
@@ -117,7 +126,7 @@ function createPatient(patient:Patient){
     const editButton:HTMLButtonElement = document.createElement('button')
     editButton.className = 'form-edit-button'
     editButton.innerText = 'Edit';
-    editButton.addEventListener('click', () => executeEdition(patient, nameInput, ageInput, identificationNumberInput, numberOfAppointmentsInput, dateAppointmentInput))
+    editButton.addEventListener('click', () => executeEdition(patient, nameInput, ageInput, identificationNumberInput, numberOfAppointmentsInput, dateAppointmentInput, fkSpecialtyIdInput))
   
     const formContainer = document.querySelector('.form-container');
     formContainer?.append(editButton)
@@ -127,9 +136,10 @@ function createPatient(patient:Patient){
     identificationNumberInput.value = patient.identificationNumber;
     numberOfAppointmentsInput.value = patient.numberOfAppointments;
     dateAppointmentInput.value = patient.dateAppointment;
+    fkSpecialtyIdInput.value = patient.fkSpecialtyId;
   }
   
-  function executeEdition(patient:Patient, name:HTMLInputElement, age:HTMLInputElement, identificationNumber:HTMLInputElement, numberOfAppointments:HTMLInputElement, dateAppointment:HTMLInputElement){
+  function executeEdition(patient:Patient, name:HTMLInputElement, age:HTMLInputElement, identificationNumber:HTMLInputElement, numberOfAppointments:HTMLInputElement, dateAppointment:HTMLInputElement, fkSpecialtyId:HTMLInputElement){
   
 
   
@@ -139,7 +149,8 @@ function createPatient(patient:Patient){
       age: age.value,
       identificationNumber: identificationNumber.value,
       numberOfAppointments: numberOfAppointments.value,
-      dateAppointment: dateAppointment.value
+      dateAppointment: dateAppointment.value,
+      fkSpecialtyId: fkSpecialtyId.value
       
     }
   
@@ -158,13 +169,15 @@ function createPatient(patient:Patient){
         pNumberOfAppointments.innerText = patientsEdited.numberOfAppointments
         const pDateAppointment = document.querySelector(`.single-patient-date-${patient.id}`) as HTMLParagraphElement
         pDateAppointment.innerText = patientsEdited.dateAppointment
-       
+        const pFkSpecialtyId = document.querySelector(`.single-patient-fkSpecialtyId-${patient.id}`) as HTMLParagraphElement
+        pFkSpecialtyId.innerText = patientsEdited.fkSpecialtyId
         
         name.value = ''
         age.value = ''
         identificationNumber.value = '',
         numberOfAppointments.value = '',
-        dateAppointment.value = ''
+        dateAppointment.value = '',
+        fkSpecialtyId.value = ''
 
 
         const submitButton = document.querySelector('.patients-form-button') as HTMLButtonElement
@@ -191,7 +204,7 @@ function createPatient(patient:Patient){
     })
   }
   
-  function recreateNotes(patient:Patient[]){
+  function recreatePatient(patient:Patient[]){
     patient.forEach(patient => createPatient(patient))
   }
   

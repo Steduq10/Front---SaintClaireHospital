@@ -3,7 +3,7 @@ import { getAllSpecialistPatient, postSpecialistPatient, deleteSpecialist, putSp
 const form: HTMLFormElement |null = 
 document.querySelector('.specialtiesPatients-form');
 
-class Patient{
+/*class Patient{
   id:number|null
   age:number
   identificationNumber:number
@@ -18,13 +18,13 @@ class Patient{
     this.dateAppointment = dateAppointment;
   }
 
-}
+}*/
 
 export interface SpecialistPatient{
   id:number|null,
   name:string,
   physicianCharge:string,
-  patientList:Patient[];
+  //patientList:Patient[];
 }
 
 getAllSpecialistPatient().then(specialistPatients => {
@@ -33,7 +33,7 @@ getAllSpecialistPatient().then(specialistPatients => {
 })
 
 let state:SpecialistPatient[] = []
-let patientList:Patient[]=[]
+//let patientList:Patient[]=[]
 
 form?.addEventListener('submit', (e) => handleSubmit(e))
 
@@ -50,7 +50,7 @@ function handleSubmit(e:SubmitEvent){
       id: null,
       name: nameInput.value,
       physicianCharge: physicianInput.value,
-      patientList
+      //patientList
       //date: date.toISOString()
     }
     
@@ -130,7 +130,7 @@ function createReminder(specialistPatient:SpecialistPatient){
       id:specialistPatient.id,
       name:name.value,
       physicianCharge:physician.value,
-      patientList
+      //patientList
       //date: date.toISOString()
     }
   
