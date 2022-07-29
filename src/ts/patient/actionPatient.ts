@@ -1,7 +1,7 @@
-import { Patient } from "./index";
+import { Patient } from "./indexPatient";
 
 export async function getAllPatient() {
-  const response:Response = await fetch('http://localhost:8081/hospital/')
+  const response:Response = await fetch('http://localhost:8081/hospital/patient')
 
   const data:Patient[] = await response.json()
 
@@ -9,7 +9,7 @@ export async function getAllPatient() {
 } 
 
 export async function postPatient(patient:Patient){
-  const response:Response = await fetch('http://localhost:8081/hospital/create/specialty', 
+  const response:Response = await fetch('http://localhost:8081/hospital/create/patient', 
   {
     method: 'POST',
     headers: {
@@ -22,7 +22,7 @@ export async function postPatient(patient:Patient){
 }
 
 export async function deletePatient(id:string){
-  const response:Response = await fetch(`http://localhost:8081/hospital/delete/specialty`, 
+  const response:Response = await fetch(`http://localhost:8081/hospital/delete/patient`, 
   {
     method: 'DELETE'
   })
@@ -31,7 +31,7 @@ export async function deletePatient(id:string){
 }
 
 export async function putPatient(patient:Patient){
-  const response:Response = await fetch('http://localhost:8081/hospital/update/specialty', 
+  const response:Response = await fetch('http://localhost:8081/hospital/update/patient', 
   {
     method: 'PUT',
     headers: {

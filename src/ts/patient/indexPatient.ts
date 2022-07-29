@@ -1,4 +1,4 @@
-import { getAllPatient, postPatient, deletePatient, putPatient} from "./action";
+import { getAllPatient, postPatient, deletePatient, putPatient} from "./actionPatient";
 
 const form: HTMLFormElement |null = 
 document.querySelector('.specialtiesPatients-form');
