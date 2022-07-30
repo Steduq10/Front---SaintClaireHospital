@@ -26,10 +26,14 @@ export function postSpecialistPatient(specialistPatient) {
         return response;
     });
 }
-export function deleteSpecialist(id) {
+export function deleteSpecialist(specialistPatient) {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch(`http://localhost:8081/hospital/delete/specialty`, {
-            method: 'DELETE'
+        const response = yield fetch('http://localhost:8081/hospital/delete/specialty', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(specialistPatient)
         });
         return response;
     });
@@ -46,3 +50,37 @@ export function putSpecialist(specialistPatient) {
         return response;
     });
 }
+
+export function postPatient(patient) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch('http://localhost:8081/hospital/create/patient', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(patient)
+        });
+        return response;
+    });
+}
+export function deletePatient(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(`http://localhost:8081/hospital/delete/patient`, {
+            method: 'DELETE'
+        });
+        return response;
+    });
+}
+export function putPatient(patient) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch('http://localhost:8081/hospital/update/patient', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(patient)
+        });
+        return response;
+    });
+}
+

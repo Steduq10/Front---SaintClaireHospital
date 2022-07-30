@@ -7,13 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export function getAllPatient() {
+/*export function getAllPatient() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch('http://localhost:8081/hospital/patient');
         const data = yield response.json();
         return data;
     });
-}
+}*/
 export function postPatient(patient) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch('http://localhost:8081/hospital/create/patient', {

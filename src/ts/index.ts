@@ -1,4 +1,4 @@
-import { getAllSpecialistPatient, postSpecialistPatient, deleteSpecialist, putSpecialist} from "./actions";
+import { getAllSpecialistPatient, postSpecialistPatient, deleteSpecialist, putSpecialist} from "./actions.js";
 
 const form: HTMLFormElement |null = 
 document.querySelector('.specialtiesPatients-form');
@@ -24,7 +24,7 @@ export interface SpecialistPatient{
   id:number|null,
   name:string,
   physicianCharge:string,
-  //patientList:Patient[];
+  //patients: []
 }
 
 getAllSpecialistPatient().then(specialistPatients => {
@@ -35,6 +35,10 @@ getAllSpecialistPatient().then(specialistPatients => {
 let state:SpecialistPatient[] = []
 //let patientList:Patient[]=[]
 
+function showSpecialistForm(){
+
+}
+
 form?.addEventListener('submit', (e) => handleSubmit(e))
 
 function handleSubmit(e:SubmitEvent){
@@ -43,15 +47,12 @@ function handleSubmit(e:SubmitEvent){
   const physicianInput = document.querySelector('.physician-input') as HTMLInputElement;
   
   if(nameInput.value&&physicianInput.value){
-    //const date = new Date()
-    //date.setHours(date.getHours() - 5)
-
+    
     const newSpecialistPatient: SpecialistPatient = {
       id: null,
       name: nameInput.value,
       physicianCharge: physicianInput.value,
-      //patientList
-      //date: date.toISOString()
+      //patients: []
     }
     
 
@@ -60,7 +61,7 @@ function handleSubmit(e:SubmitEvent){
         if(response.status === 200){
           state.push(newSpecialistPatient)
 
-          createReminder(newSpecialistPatient);  
+          createSpecialistPatient(newSpecialistPatient);  
           nameInput.value = '';
           physicianInput.value = '';
         }
@@ -70,7 +71,7 @@ function handleSubmit(e:SubmitEvent){
 }
 
 
-function createReminder(specialistPatient:SpecialistPatient){
+function createSpecialistPatient(specialistPatient:SpecialistPatient){
     const specialistContainer = document.querySelector('.specialist-container') as HTMLDivElement
   
     const div:HTMLDivElement = document.createElement('div');
@@ -92,7 +93,7 @@ function createReminder(specialistPatient:SpecialistPatient){
     const deleteButton:HTMLButtonElement = document.createElement('button')
     deleteButton.className = 'single-specialist-delete-button'
     deleteButton.innerText = 'X'
-    deleteButton.addEventListener('click', ()=> handleDelete(div))
+    deleteButton.addEventListener('click', ()=> handleDelete(specialistPatient))
   
     const editButton:HTMLButtonElement = document.createElement('button')
     editButton.className = 'single-note-edit-button'
@@ -162,7 +163,7 @@ function createReminder(specialistPatient:SpecialistPatient){
   
   }
   
-  function handleDelete(div:HTMLDivElement){
+  /*function handleDelete(div:HTMLDivElement){
     const id:string = div.classList[1].split('-')[1]
     deleteSpecialist(id).then(response => {
       if(response.status === 200){
@@ -171,10 +172,24 @@ function createReminder(specialistPatient:SpecialistPatient){
         state = newState
       }
     })
+  }*/
+  function handleDelete(specialistPatient:SpecialistPatient){
+   // const id:string = div.classList[1].split('-')[1]
+    deleteSpecialist(specialistPatient).then(response => {
+      const specialistPatientDiv = document.querySelector(`#speciality-${specialistPatient.id}`) as HTMLDivElement
+      if(response.status === 200){
+        
+        specialistPatientDiv.remove()
+        
+        
+      }
+    })
   }
+
+
   
   function recreateNotes(specialistPatient:SpecialistPatient[]){
-    specialistPatient.forEach(specialistPatient => createReminder(specialistPatient))
+    specialistPatient.forEach(specialistPatient => createSpecialistPatient(specialistPatient))
   }
   
   

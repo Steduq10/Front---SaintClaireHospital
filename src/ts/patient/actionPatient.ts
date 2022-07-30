@@ -1,12 +1,12 @@
-import { Patient } from "./indexPatient";
+import { Patient } from "./indexPatient.js";
 
-export async function getAllPatient() {
+/*export async function getAllPatient() {
   const response:Response = await fetch('http://localhost:8081/hospital/patient')
 
   const data:Patient[] = await response.json()
 
   return data
-} 
+} */
 
 export async function postPatient(patient:Patient){
   const response:Response = await fetch('http://localhost:8081/hospital/create/patient', 

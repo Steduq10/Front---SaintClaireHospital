@@ -1,11 +1,11 @@
-import { getAllPatient, postPatient, deletePatient, putPatient } from "./actions";
-const form = document.querySelector('.specialtiesPatients-form');
+import { postPatient, deletePatient, putPatient } from "./actions.js";
+const form = document.querySelector('.patients-form');
 
 
-getAllPatient().then(patients => {
+/*getAllPatient().then(patients => {
     state = patients;
     recreatePatients(patients);
-});
+});*/
 let state = [];
 
 form === null || form === void 0 ? void 0 : form.addEventListener('submit', (e) => handleSubmit(e));

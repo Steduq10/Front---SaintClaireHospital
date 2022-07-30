@@ -1,4 +1,4 @@
-import { SpecialistPatient } from "./index";
+import { SpecialistPatient } from "./index.js";
 
 export async function getAllSpecialistPatient() {
   const response:Response = await fetch('http://localhost:8081/hospital/')
@@ -21,8 +21,8 @@ export async function postSpecialistPatient(specialistPatient:SpecialistPatient)
   return response;
 }
 
-export async function deleteSpecialist(id:string){
-  const response:Response = await fetch(`http://localhost:8081/hospital/delete/specialty${id}`, 
+export async function deleteSpecialist(specialistPatient:SpecialistPatient){
+  const response:Response = await fetch('http://localhost:8081/hospital/delete/specialty', 
   {
     method: 'DELETE'
   })

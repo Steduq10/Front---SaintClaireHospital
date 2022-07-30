@@ -1,23 +1,23 @@
-import { getAllPatient, postPatient, deletePatient, putPatient} from "./actionPatient";
+import { postPatient, deletePatient, putPatient} from "./actionPatient";
 
 const form: HTMLFormElement |null = 
-document.querySelector('.specialtiesPatients-form');
+document.querySelector('.patients-form');
 
 
 export interface Patient{
     id:number|null
     name:string
-    age:string
+    age: string
     identificationNumber:string
     numberOfAppointments:string
     dateAppointment:string
     fkSpecialtyId: string
 }
 
-getAllPatient().then(patient => {
+/*getAllPatient().then(patient => {
   state = patient
   recreatePatient(patient);
-})
+})*/
 
 let state:Patient[] = []
 
