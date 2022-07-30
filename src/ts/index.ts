@@ -1,3 +1,4 @@
+import { skipPartiallyEmittedExpressions } from "../../node_modules/typescript/lib/typescript.js";
 import { getAllSpecialistPatient, postSpecialistPatient, deleteSpecialist, putSpecialist} from "./actions.js";
 
 const form: HTMLFormElement |null = 
@@ -24,7 +25,7 @@ export interface SpecialistPatient{
   id:number|null,
   name:string,
   physicianCharge:string,
-  //patients: []
+  patients: []
 }
 
 getAllSpecialistPatient().then(specialistPatients => {
@@ -52,7 +53,7 @@ function handleSubmit(e:SubmitEvent){
       id: null,
       name: nameInput.value,
       physicianCharge: physicianInput.value,
-      //patients: []
+      patients: []
     }
     
 
@@ -131,7 +132,7 @@ function createSpecialistPatient(specialistPatient:SpecialistPatient){
       id:specialistPatient.id,
       name:name.value,
       physicianCharge:physician.value,
-      //patientList
+      patients: specialistPatient.patients
       //date: date.toISOString()
     }
   
@@ -180,7 +181,8 @@ function createSpecialistPatient(specialistPatient:SpecialistPatient){
       if(response.status === 200){
         
         specialistPatientDiv.remove()
-        
+        //const newState = state.filter(specialistPatient => specialistPatient.id !== parseInt(specialistPatient.id))
+        //state = newState
         
       }
     })

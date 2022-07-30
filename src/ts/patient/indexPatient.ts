@@ -1,4 +1,4 @@
-import { postPatient, deletePatient, putPatient} from "./actionPatient";
+import { postPatient, deletePatient, putPatient} from "./actionPatient.js";
 
 const form: HTMLFormElement |null = 
 document.querySelector('.patients-form');
@@ -7,8 +7,8 @@ document.querySelector('.patients-form');
 export interface Patient{
     id:number|null
     name:string
-    age: string
-    identificationNumber:string
+    age: number
+    identificationNumber: number
     numberOfAppointments:string
     dateAppointment:string
     fkSpecialtyId: string
@@ -22,9 +22,9 @@ export interface Patient{
 let state:Patient[] = []
 
 
-form?.addEventListener('submit', (e) => handleSubmit(e))
+form?.addEventListener('submit', (e) => handleSubmitPatient(e))
 
-function handleSubmit(e:SubmitEvent){
+function handleSubmitPatient(e:SubmitEvent){
   e.preventDefault()
   const nameInput = document.querySelector('.name-input') as HTMLInputElement;
   const ageInput = document.querySelector('.age-input') as HTMLInputElement;
@@ -38,14 +38,17 @@ function handleSubmit(e:SubmitEvent){
     const newPatient: Patient = {
       id: null,
       name: nameInput.value,
-      age: ageInput.value,
-      identificationNumber: identificationNumberInput.value,
+      age: parseInt(ageInput.value),
+      identificationNumber: parseInt(identificationNumberInput.value),
       numberOfAppointments: numberOfAppointmentsInput.value,
       dateAppointment: dateAppointmentInput.value,
       fkSpecialtyId: fkSpecialtyIdInput.value
       
       
     }
+
+    let exist:boolean = false;
+    
     
 
     postPatient(newPatient).then(
@@ -80,11 +83,13 @@ function createPatient(patient:Patient){
     
     const ageP:HTMLParagraphElement = document.createElement('p')
     ageP.className = `single-patient-physician-${patient.id}`
-    ageP.innerText = patient.age
+    const age = String(patient.age)
+    ageP.innerText = age
     
     const identificationNumberP:HTMLParagraphElement = document.createElement('p')
     identificationNumberP.className = `single-patient-physician-${patient.id}`
-    identificationNumberP.innerText = patient.identificationNumber
+    const identificationNumber = String(patient.identificationNumber)
+    identificationNumberP.innerText = identificationNumber
     
     const numberOfAppointmentsP:HTMLParagraphElement = document.createElement('p')
     numberOfAppointmentsP.className = `single-patient-physician-${patient.id}`
@@ -132,8 +137,10 @@ function createPatient(patient:Patient){
     formContainer?.append(editButton)
     
     nameInput.value = patient.name
-    ageInput.value = patient.age;
-    identificationNumberInput.value = patient.identificationNumber;
+    const age = String(patient.age)
+    ageInput.value = age;
+    const identificationNumber = String(patient.identificationNumber)
+    identificationNumberInput.value = identificationNumber;
     numberOfAppointmentsInput.value = patient.numberOfAppointments;
     dateAppointmentInput.value = patient.dateAppointment;
     fkSpecialtyIdInput.value = patient.fkSpecialtyId;
@@ -146,8 +153,8 @@ function createPatient(patient:Patient){
     const patientsEdited:Patient = {
       id:patient.id,
       name:name.value,
-      age: age.value,
-      identificationNumber: identificationNumber.value,
+      age: parseInt(age.value),
+      identificationNumber: parseInt(identificationNumber.value),
       numberOfAppointments: numberOfAppointments.value,
       dateAppointment: dateAppointment.value,
       fkSpecialtyId: fkSpecialtyId.value
@@ -162,9 +169,11 @@ function createPatient(patient:Patient){
         const pName = document.querySelector(`.single-patient-name-${patient.id}`) as HTMLHeadingElement
         pName.innerText = patientsEdited.name
         const pAge = document.querySelector(`.single-patient-age-${patient.id}`) as HTMLParagraphElement
-        pAge.innerText = patientsEdited.age
+        const age = String(patientsEdited.age)
+        pAge.innerText = age
         const pIdentificationNumber = document.querySelector(`.single-patient-identification-${patient.id}`) as HTMLParagraphElement
-        pIdentificationNumber.innerText = patientsEdited.identificationNumber
+        const identificationNumber = String(patientsEdited.identificationNumber)
+        pIdentificationNumber.innerText = identificationNumber
         const pNumberOfAppointments = document.querySelector(`.single-patient-approintments-${patient.id}`) as HTMLParagraphElement
         pNumberOfAppointments.innerText = patientsEdited.numberOfAppointments
         const pDateAppointment = document.querySelector(`.single-patient-date-${patient.id}`) as HTMLParagraphElement
@@ -172,9 +181,9 @@ function createPatient(patient:Patient){
         const pFkSpecialtyId = document.querySelector(`.single-patient-fkSpecialtyId-${patient.id}`) as HTMLParagraphElement
         pFkSpecialtyId.innerText = patientsEdited.fkSpecialtyId
         
-        name.value = ''
-        age.value = ''
-        identificationNumber.value = '',
+        name.value = '',
+        
+
         numberOfAppointments.value = '',
         dateAppointment.value = '',
         fkSpecialtyId.value = ''

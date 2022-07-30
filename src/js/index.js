@@ -18,7 +18,7 @@ function handleSubmit(e) {
             id: null,
             name: nameInput.value,
             physicianCharge: physicianInput.value,
-            
+            patients: []
             
         };
         postSpecialistPatient(newSpecialistPatient).then(response => {
@@ -74,7 +74,7 @@ function executeEdition(specialistPatient, name, physician) {
         id: specialistPatient.id,
         name: name.value,
         physicianCharge: physician.value,
-        
+        patients: specialistPatient.patients
         
     };
     putSpecialist(specialistEdited).then(response => {

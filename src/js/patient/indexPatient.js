@@ -1,4 +1,4 @@
-import { postPatient, deletePatient, putPatient } from "./actions.js";
+import { postPatient, deletePatient, putPatient } from "./actionPatient.js";
 const form = document.querySelector('.patients-form');
 
 
@@ -8,8 +8,8 @@ const form = document.querySelector('.patients-form');
 });*/
 let state = [];
 
-form === null || form === void 0 ? void 0 : form.addEventListener('submit', (e) => handleSubmit(e));
-function handleSubmit(e) {
+form === null || form === void 0 ? void 0 : form.addEventListener('submit', (e) => handleSubmitPatient(e));
+function handleSubmitPatient(e) {
     e.preventDefault();
     const nameInput = document.querySelector('.name-input') 
   const ageInput = document.querySelector('.age-input') 
@@ -18,7 +18,7 @@ function handleSubmit(e) {
   const dateAppointmentInput = document.querySelector('.dayAppointment-input') 
     if (nameInput.value&&identificationNumberInput.value&&ageInput.value&&numberOfAppointmentsInput.value&&dateAppointmentInput.value) {
        
-        const newSpecialistPatient = {
+        const newPatient = {
             id: null,
             name: nameInput.value,
             age: ageInput.value,

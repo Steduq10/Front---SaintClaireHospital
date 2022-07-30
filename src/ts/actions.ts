@@ -24,7 +24,11 @@ export async function postSpecialistPatient(specialistPatient:SpecialistPatient)
 export async function deleteSpecialist(specialistPatient:SpecialistPatient){
   const response:Response = await fetch('http://localhost:8081/hospital/delete/specialty', 
   {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(specialistPatient)
   })
 
   return response;
