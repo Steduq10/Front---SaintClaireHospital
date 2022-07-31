@@ -22,33 +22,42 @@
           <section class="form-container">
             
               <div class="parent">
-                <button class="box" id="specialist"  >Specialist</button>  <!--onclick="newGame()"-->
+                <h1 class="box" id="specialist"  >Specialist</h1>  <!--onclick="newGame()"-->
                 <form class="specialtiesPatients-form" action="#" >
                   <input placeholder="name" class="name-input" type="text" />
                   <input placeholder="physician" class="physician-input" type="text">
                   <button class="specialist-form-button">Submit</button>
                 </form>
-            <button class="box" id="patient" >Patient</button>
-            <form class="patients-form" action="#">
-              <input placeholder="name" class="name-input" type="text" />
-              <input placeholder="age" class="age-input" type="text">
-              <input placeholder="identification number" class="identificationNumber-input" type="text">
-              <input placeholder="number of appointments" class="numberOfAppointments-input" type="text">
+              </div>
+            </section>
+            <section class="formPatient-container">
+              <div class="parent">
+              <h1 class="box" id="patient" >Patient</h1>
+            <form class="patients-form" action="##">
+              <input placeholder="name" class="namePatient-input" type="text" />
+              <input placeholder="age" class="agePatient-input" type="number">
+              <input placeholder="identification number" class="identificationNumber-input" type="number">
+              
               <input placeholder="date appointment" class="dateAppointment-input" type="text">
-              <input placeholder="ID specialist" class="fkSpecialtyId-input" type="text">
+              <input placeholder="ID specialist" class="fkSpecialtyId-input" type="number">
               <button class="patients-form-button">Submit</button>
             </form>      
+
+              </div>
+            </section>
             </div>
           
               
-          </section>
+          
           <div class="specialist-container">
     
           </div>
         </div>
       </div>
+
+
       <script defer type="module" src="/src/js/index.js"></script>
-      <script defer type="module" src="/src/js/patient/indexPatient.js"></script>
+      <!--<script defer type="module" src="/src/js/patient/indexPatient.js"></script>-->
     
 </body>
 </html>
